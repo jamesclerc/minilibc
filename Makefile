@@ -9,7 +9,8 @@ NAME		=	libasm.so
 
 SRCS		=	src/strlen.asm	\
 			src/strchr.asm	\
-			src/strcmp.asm
+			src/strcmp.asm	\
+			src/strncmp.asm
 
 ASMFLAGS	=	-f elf64
 
@@ -17,7 +18,7 @@ LDFLAGS		=	-shared -fno-builtin
 
 ASM		=	nasm
 
-CC		=	gcc
+CC		=	ld
 
 RM		=	rm -f
 
