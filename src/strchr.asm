@@ -4,24 +4,24 @@ GLOBAL	strchr:function
 
 SECTION .text
 
-strlen:
+strchr:
 	ENTER 0,0
-	XOR RCX, RCX
+	XOR RAX, RAX
 
 loop:
-	CMP	byte[RDI + RCX], 0
-	JZ	end
-	CMP	byte[RDI + RCX], SIL
-	JE	end1
-	INC	RCX
-	JMP	loop
+	CMP	byte[RDI], SIL 	;compare str with 2 arg(8 bit)
+	JE	end1		; if equal return pointer
+	CMP	byte[RDI], 0	;compare str with end
+	JZ	end		;if equal return NULL
+	INC	RDI		;inc str++
+	JMP	loop		;call while
 
 end1:
-	MOV	RAX, [RDI + RCX]
+	ADD	RAX, RDI
 	LEAVE
 	RET
 
 end:
-	MOV	RAX, RCX
+	MOV	RAX, 0
 	LEAVE
 	RET

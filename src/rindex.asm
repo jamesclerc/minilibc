@@ -1,23 +1,34 @@
 BITS 64
 
-extern  strlen
+GLOBAL rindex:function
 
-GLOBAL  rindex:function
+SECTION .text
 
 rindex:
-    ENTER   0,0
-    XOR     RBX, RBX
-    call    strlen wrt ..plt
+	ENTER	0, 0
+	MOV	RBX, -1
+	XOR	RAX, RAX	
 
-loo:
-    CMP [RDI + RAX], RDI
-    JZ  end
-    CMP [RDI + RAX], RSI
-    MOV RCX, [RDI + RAX]
-    DEC RAX
-    JMP loo
+getsize:
+	INC	RBX
+	CMP	byte[RDI + RBX], 0
+	JNE	getsize
+
+loop:
+	CMP	[RDI + RBX], SIL
+	JE	end1
+	CMP	RBX, 0
+	JE	end
+	DEC	RBX
+	JMP	loop
+
+end1:
+	ADD	RBX, RDI
+	MOV	RAX, RBX
+	LEAVE
+	RET
 
 end:
-    MOV RAX, RCX
-    LEAVE
-    RET
+	XOR	RAX, RAX
+	LEAVE
+	RET
