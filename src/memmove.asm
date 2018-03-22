@@ -5,24 +5,22 @@ SECTION .text
 GLOBAL memmove:function
 
 memmove:
-	mov rax, rsi
-	cmp rdi, rsi
-	je bad_end
-	test rdx, rdx
-	je bad_end
-	mov r8, rdx
-	XOR EAX, EAX
-
+	MOV	RAX, RSI
+	CMP	RDI, RAX ;comparaison entre str et str2
+	JE	bad_end
+	CMP	RDX, 0	 ;check si n == 0
+	JE	bad_end
+	XOR	RAX, RAX ;i = 0
 loop:
-	movzx ecx, BYTE[rdi+rax]
-	mov BYTE[rsi+rax], cl
-	add rax, 1
-	cmp rax, r8
-	jne loop
+	MOV	CL, BYTE[RDI + RAX]
+	MOV	BYTE[RSI + RAX], CL
+	INC	RAX
+	CMP	RAX, RDX ;compare RAX avec R8 (i < n_byte)
+	JNE	loop
 
 end:
-	lea rax, [rsi+rdx]
-	ret
+	MOV	RAX, RSI ;on return la premiere value de rsi
+	RET
 
 bad_end:
-	ret
+	RET

@@ -13,9 +13,9 @@ memcpy:
 loop:
 	CMP	RBX, RDX ;compare rdx == rcx
 	JZ	end
-	MOV	SPL, byte[RSI + RBX]
-	MOV	byte[RDI + RBX], SPL
-	INC	RBX
+	MOV	SPL, byte[RSI + RBX] ;on déplace le bit str + i dans spl
+	MOV	byte[RDI + RBX], SPL ;on y remplace dans rdi
+	INC	RBX			; i++
 	JMP	loop
 
 end:

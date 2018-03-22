@@ -10,15 +10,15 @@ rindex:
 	XOR	RAX, RAX	
 
 getsize:
-	INC	RBX
+	INC	RBX	;agit comme un strlen
 	CMP	byte[RDI + RBX], 0
 	JNE	getsize
 
 loop:
-	CMP	[RDI + RBX], SIL
-	JE	end1
-	CMP	RBX, 0
-	JE	end
+	CMP	[RDI + RBX], SIL ;meme chose que strchr
+	JE	end1		 ;on part de la fin
+	CMP	RBX, 0		 ;on check jusqu'a ce qu'on trouve
+	JE	end		 ;ou qu'on arrive a 0
 	DEC	RBX
 	JMP	loop
 
