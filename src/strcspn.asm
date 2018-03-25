@@ -13,7 +13,7 @@ loop:
 	JMP	incre
 check:
 	TEST	CL, CL
-	JE	mov
+	JE	movv
 incre:
 	ADD	RDX, 1
 	MOVZX	ECX, BYTE[RDX - 1]

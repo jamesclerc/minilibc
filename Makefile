@@ -15,7 +15,8 @@ SRCS		=	src/strlen.asm	\
 			src/memset.asm	\
 			src/memcpy.asm	\
 			src/memmove.asm	\
-			src/strstr.asm
+			src/strstr.asm	\
+			src/strcspn.asm
 
 ASMFLAGS	=	-f elf64
 
